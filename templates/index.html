@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hariharan Vijayan — Stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+  <div class="noise"></div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-logo">Hariharan <span class="accent">Vijayan</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#characters">Characters</a></li>
+      <li><a href="#read">Read</a></li>
+      <li><a href="#upcoming">Upcoming</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-tag mono reveal">// Story Writer</p>
+      <h1 class="hero-title reveal">
+        Stories<br />
+        <em>that stay.</em>
+      </h1>
+      <blockquote class="hero-quote reveal">
+        <span class="quote-mark">"</span>
+        {{ quote }}
+        <span class="quote-mark">"</span>
+        <cite>— Hariharan Vijayan</cite>
+      </blockquote>
+      <a href="#story" class="btn-scroll reveal">Read the story ↓</a>
+    </div>
+    <div class="hero-deco">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-ring"></div>
+    </div>
+  </section>
+
+    <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label mono reveal">01 / the writer</div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <h2>I write because<br/><em>I have to.</em></h2>
+          <p>
+            I'm Hariharan Vijayan — a 19-year-old from Tiruchirappalli, Tamil Nadu.
+            I write Tamil fiction. Not because it's a hobby. Because there are things
+            that only make sense when they're written down.
+          </p>
+          <p>
+            I've just written one story.
+          </p>
+          <p>
+            I write about people who feel too much, love wrong, fail loudly,
+            and still show up the next day. That's the only kind of story
+            worth telling.
+          </p>
+        </div>
+        <div class="about-meta reveal">
+          <div class="meta-card">
+            <span class="meta-num">1</span>
+            <span class="meta-label mono">stories written</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-num">English-Tamil</span>
+            <span class="meta-label mono">Language used</span>
+          </div>
+          <div class="meta-card highlight">
+            <span class="meta-num">∞</span>
+            <span class="meta-label mono">more coming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STORY ── -->
+  <section id="story">
+    <div class="section-inner">
+      <div class="section-label mono reveal">02 / featured story</div>
+
+      <div class="story-hero reveal">
+        <div class="story-badge mono">{{ story.genre }}</div>
+        <h2 class="story-title">{{ story.title }}</h2>
+        <p class="story-subtitle"><em>{{ story.subtitle }}</em></p>
+        <div class="story-meta mono">
+          <span>{{ story.status }}</span>
+        </div>
+      </div>
+
+      <div class="story-body">
+        <div class="story-desc reveal">
+          <p>{{ story.description }}</p>
+        </div>
+        <div class="story-quote-block reveal">
+          <blockquote class="story-quote">
+            <span class="sq-mark">"</span>
+            {{ story.quote_from_story }}
+            <span class="sq-mark">"</span>
+          </blockquote>
+          <p class="story-quote-credit mono">— Hariharan, Beyond Age</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CHARACTERS ── -->
+  <section id="characters">
+    <div class="section-inner">
+      <div class="section-label mono reveal">03 / the people</div>
+      <h2 class="section-title reveal">Who lives in this story</h2>
+      <div class="chars-grid">
+        {% for c in story.characters %}
+        <div class="char-card reveal" style="--delay: {{ loop.index0 * 0.1 }}s">
+          <div class="char-index mono">{{ '%02d' % loop.index }}</div>
+          <h3 class="char-name">{{ c.name }}</h3>
+          <p class="char-role mono">{{ c.role }}</p>
+          <p class="char-desc">{{ c.desc }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READ ── -->
+  <section id="read">
+    <div class="section-inner">
+      <div class="section-label mono reveal">04 / read it</div>
+      <div class="read-block reveal">
+        <h2>Read<br /><em>Beyond Age</em></h2>
+        <p>
+          Both parts available to read right here — no redirects, no apps.
+          Just the story, the way it was written.
+          By <span class="mono highlight-text">  HARIHARAN VIJAYAN</span>.
+        </p>
+        <div class="read-parts">
+          <button class="part-card" onclick="openReader(1)">
+            <span class="part-num mono">Beyond Age</span>
+            <span class="part-title">PART-1</span>
+            <span class="part-arrow">→</span>
+          </button>
+          <button class="part-card" onclick="openReader(2)">
+            <span class="part-num mono">Beyond Age</span>
+            <span class="part-title">PART-2</span>
+            <span class="part-arrow">→</span>
+          </button>
+        </div>
+        <p class="more-coming mono">// more stories coming soon.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── UPCOMING ── -->
+  <section id="upcoming">
+    <div class="section-inner">
+      <div class="section-label mono reveal">05 / upcoming</div>
+      <h2 class="section-title reveal">What's next</h2>
+      <div class="upcoming-grid">
+        <div class="upcoming-card reveal">
+          <div class="upcoming-status mono">
+            <span class="status-dot"></span>
+            In Progress
+          </div>
+          <h3 class="upcoming-title">Chronicles of Lockdown</h3>
+          <p class="upcoming-genre mono">Autobiographical Slice-of-Life · Romance · Tragedy</p>
+          <p class="upcoming-desc">
+            "A boy who hated schools, a virus that closed them,<br />
+            and his girl who never came back."
+          </p>
+          <div class="upcoming-footer mono">
+            <span>Pratilipi</span>
+            <span class="upcoming-eta">Coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READER OVERLAY ── -->
+  <div class="reader-overlay" id="readerOverlay">
+    <div class="reader-panel" id="readerPanel">
+      <div class="reader-topbar">
+        <div class="reader-info">
+          <span class="reader-title-tag mono" id="readerPartLabel">Part 01</span>
+          <span class="reader-story-name">Beyond Age</span>
+        </div>
+        <div class="reader-controls">
+          <button class="reader-font-btn mono" onclick="changeFontSize(-1)">A−</button>
+          <button class="reader-font-btn mono" onclick="changeFontSize(1)">A+</button>
+          <button class="reader-close" onclick="closeReader()" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="reader-toc" id="readerToc"></div>
+      <div class="reader-body" id="readerBody">
+        <div class="reader-loading" id="readerLoading">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span class="mono">Hariharan Vijayan © 2025</span>
+    <span class="mono muted">written in Tamil · built with Flask</span>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
